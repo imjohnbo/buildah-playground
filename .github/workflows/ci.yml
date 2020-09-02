@@ -1,0 +1,19 @@
+on:
+  push
+
+name: CI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: 
+      image: quay.io/buildah/stable
+      options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./bin/build.sh
+        env:
+          CR_PAT: ${{ secrets.CR_PAT }}
+          
+  # test:
+  # deploy:
