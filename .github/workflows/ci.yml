@@ -23,6 +23,7 @@ jobs:
           buildah push --creds=$GITHUB_ACTOR:$CR_PAT ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
   test:
     runs-on: ubuntu-latest
+    needs: build
     container: 
       image: quay.io/podman/stable
       options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
