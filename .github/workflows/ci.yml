@@ -28,8 +28,8 @@ jobs:
 
           tar -xvf dive.tar.gz
 
-          buildah pull --creds=$GITHUB_ACTOR:$CR_PAT ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+          podman pull --creds=$GITHUB_ACTOR:$CR_PAT ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
           
-          ./dive ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+          ./dive podman://ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
   # test:
   # deploy:
