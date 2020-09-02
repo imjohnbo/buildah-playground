@@ -7,7 +7,7 @@ env:
   CR_PAT: ${{ secrets.CR_PAT }}
 
 jobs:
-  ci:
+  build:
     runs-on: ubuntu-latest
     container: 
       image: quay.io/buildah/stable
@@ -21,7 +21,13 @@ jobs:
       - name: Push
         run: |
           buildah push --creds=$GITHUB_ACTOR:$CR_PAT ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
-
+  test:
+    runs-on: ubuntu-latest
+    container: 
+      image: quay.io/podman/stable
+      options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
+    steps:
+      - uses: actions/checkout@v2
       - name: Test
         run: |
           curl -L https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.tar.gz > dive.tar.gz
