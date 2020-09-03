@@ -20,7 +20,7 @@ Required secrets:
 
 ## Usage
 
-Upon `push` to [`site`](site) or manual trigger, [`ci.yml`](.github/workflows/ci.yml) kicks off, building a container image out of [`site`](site) using Buildah, tagging it with the Git `sha` and pushing to GitHub Container Registry, pulling it down again to run optimization tests, then pushed to Azure Container Registry.
+Upon `push` to [`site`](site) or manual trigger, [`ci.yml`](.github/workflows/ci.yml) kicks off, building a container image out of [`site`](site) using Buildah, tagging it with the Git `sha` and pushing it to GitHub Container Registry. We're using GHCR as our "dev" registry in this case. This image is private by default and will be available on your user or organization profile, eg. https://github.com/octocat?tab=packages. The workflow then pulls it down again to run optimization tests, and finally pushes it to Azure Container Registry, our "prod" registry.
 
 ## License
 
