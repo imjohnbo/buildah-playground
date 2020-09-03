@@ -1,5 +1,7 @@
 # Buildah Playground
 
+![workflow badge](https://github.com/imjohnbo/buildah-playground/workflows/CI/badge.svg)
+
 This example project shows how [Buildah](https://github.com/containers/buildah), [Dive](https://github.com/wagoodman/dive), and [Skopeo](https://github.com/containers/skopeo) can be used with GitHub Actions, GitHub Container Registry, and Azure Container Registry. 🚀
 
 [`site`](site) is built, pushed to a "dev" registry, tested for optimization, then pushed to a "prod" registry.
