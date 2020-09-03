@@ -1,5 +1,8 @@
 on:
-  push
+  push:
+    paths:
+      - site/**
+  workflow_dispatch:
 
 name: CI
 
@@ -57,18 +60,14 @@ jobs:
       options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
     steps:
       - uses: actions/checkout@v2
-      - name: Test
+      - name: Copy image to Prod registry
         env:
           AZ_LOGIN: ${{ secrets.az_login }}
           AZ_PASSWORD: ${{ secrets.az_password }}
+          AZ_REGISTRY: ${{ secrets.az_registry }}
         run: |
           skopeo copy \
             --src-creds=$GITHUB_ACTOR:$CR_PAT \
             --dest-creds=$AZ_LOGIN:$AZ_PASSWORD \
             docker://ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA \
-            docker://octozenregistry.azurecr.io/$GITHUB_REPOSITORY:latest
-
-
-
-    
-
+            docker://$AZ_REGISTRY.azurecr.io/$GITHUB_REPOSITORY:latest
