@@ -65,8 +65,8 @@ jobs:
           skopeo copy \
             --src-creds=$GITHUB_ACTOR:$CR_PAT \
             --dest-creds=$AZ_LOGIN:$AZ_PASSWORD \
-            ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA \
-            octozenregistry.azurecr.io/$GITHUB_REPOSITORY:latest
+            docker://ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA \
+            docker://octozenregistry.azurecr.io/$GITHUB_REPOSITORY:latest
 
 
 
