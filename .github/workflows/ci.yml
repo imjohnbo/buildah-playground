@@ -16,7 +16,7 @@ jobs:
     runs-on: [self-hosted]
     container: 
       image: quay.io/buildah/stable
-      options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
+#       options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
     steps:
       - uses: actions/checkout@v2
       - name: Build
@@ -37,7 +37,7 @@ jobs:
     needs: build-push-ghcr
     container: 
       image: quay.io/podman/stable
-      options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
+#       options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
     steps:
       - uses: actions/checkout@v2
       - name: Run Dive
@@ -58,7 +58,7 @@ jobs:
     needs: test
     container: 
       image: quay.io/skopeo/stable
-      options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
+#       options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
     steps:
       - uses: actions/checkout@v2
       - name: Copy image to Prod registry
