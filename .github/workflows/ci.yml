@@ -13,7 +13,7 @@ jobs:
   build-push-ghcr:
     # This image is private by default and will be available on your user or organization profile, eg. https://github.com/octocat?tab=packages
     name: Build and push to GitHub Container Registry
-    runs-on: [self-hosted]
+    runs-on: [ubuntu-latest]
     container: 
       image: quay.io/buildah/stable
       options: --security-opt seccomp=/usr/share/containers/seccomp.json --privileged
@@ -33,7 +33,7 @@ jobs:
 
   test:
     name: Test optimization
-    runs-on: [self-hosted]
+    runs-on: [ubuntu-latest]
     needs: build-push-ghcr
     container: 
       image: quay.io/podman/stable
@@ -54,7 +54,7 @@ jobs:
 
   push-prod:
     name: Push image to prod
-    runs-on: [self-hosted]
+    runs-on: [ubuntu-latest]
     needs: test
     container: 
       image: quay.io/skopeo/stable
